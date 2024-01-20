@@ -116,26 +116,53 @@
           <input type="password" class="form-control mb-3" name="password" id="password" placeholder="Password">
           <input type="password" class="form-control mb-3" name="confirm-password" id="confirm-password"
             placeholder="Confirm Password">
-          <button type="button" class="btn btn-primary w-100">Register</button>
+          <button type="button" class="btn btn-primary w-100 register-button">Register</button>
         </form>
-        <!-- <div class="container"> -->
         <h5>Already have an account?</h5>
-        <button type="button" class="btn btn-primary">Log in</button>
-        <!-- </div> -->
+        <button type="button" class="btn btn-primary toggle-button">Log In</button>
       </div>
-      <div class="login" style="display: none;">
-        <form action="#">
-          <img src="/public/tweeter-small.svg" alt="Logo">
-          <h1>Welcome back</h1>
-          <input type="email" placeholder="Email">
-          <input type="password" name="password" id="password">
-          <button type="button" class="btn btn-primary">Log in</button>
+      <div class="login container d-flex flex-column justify-content-center align-items-center d-none">
+        <form action="#" class="mb-3 container d-flex flex-column justify-content-center align-items-center">
+          <img src="/public/tweeter-small.svg" alt="Logo" class="mb-3">
+          <h1 class="mb-3">Welcome back</h1>
+          <input type="email" placeholder="Email" class="form-control mb-3">
+          <input type="password" name="password" id="password" class="form-control mb-3">
+          <button type="button" class="btn btn-primary w-100 login-button">Log In</button>
         </form>
         <h5>Don't have an account yet?</h5>
-        <button type="button" class="btn btn-primary">Register</button>
+        <button type="button" class="btn btn-primary toggle-button">Register</button>
       </div>
     </div>
   </div>
+
+  <script defer>
+    const registerEl = document.querySelector(".register");
+    const loginEl = document.querySelector(".login");
+    const registerBtn = document.querySelector(".register-button");
+    const loginBtn = document.querySelector(".login-button");
+    let toggleButton = document.querySelector(".toggle-button");
+
+    function toggleForms(e) {
+      // registerEl.style.display = registerForm.style.display === "none" ? "" : "none";
+      // loginEl.style.display = registerForm.style.display === "none" ? "" : "none";
+      // toggleButtons.forEach(button => button.textContent = button.textContent === "Register" ? "Log In" : "Register");
+      let btnContent = e.target.textContent.toLowerCase();
+      e.target.hidden = true;
+      if (btnContent === "log in") {
+        registerEl.classList.add("d-none");
+        loginEl.classList.remove("d-none");
+      } else {
+        loginEl.classList.add("d-none");
+        registerEl.classList.remove("d-none");
+      }
+      toggleButton = document.querySelector(".toggle-button:not([hidden])");
+      toggleButton.addEventListener("click", toggleForms);
+      console.log(toggleButton)
+    }
+    // registerToggleBtn.addEventListener("click", toggleForms);
+    toggleButton.addEventListener("click", toggleForms);
+
+  </script>
 </body>
 
 </html>
