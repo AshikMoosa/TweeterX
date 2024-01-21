@@ -51,7 +51,6 @@
 
     }
 
-
     .home-guest-container .items-container {
       list-style: none;
       padding: 0;
@@ -67,7 +66,10 @@
     }
 
     .home-guest-container .authentication {
+      flex-direction: column;
       flex: 1;
+      align-self: center;
+      gap: 0.5em;
     }
 
     /* .home-guest-container .authentication .register,
@@ -110,7 +112,7 @@
       <div class="register container d-flex flex-column justify-content-center align-items-center">
         <form action="#" class="mb-3 container d-flex flex-column justify-content-center align-items-center">
           <img src="/public/tweeter-small.svg" alt="Logo" class="mb-3">
-          <h1 style="font-size: 1.5em;" class="mb-3">Join Tweeter today</h1>
+          <h3 class="mb-3">Join Tweeter today</h3>
           <input type="text" class="form-control mb-3" placeholder="Username">
           <input type="email" class="form-control mb-3" placeholder="Email">
           <input type="password" class="form-control mb-3" name="password" id="password" placeholder="Password">
@@ -119,19 +121,18 @@
           <button type="button" class="btn btn-primary w-100 register-button">Register</button>
         </form>
         <h5>Already have an account?</h5>
-        <button type="button" class="btn btn-primary toggle-button">Log In</button>
       </div>
       <div class="login container d-flex flex-column justify-content-center align-items-center d-none">
         <form action="#" class="mb-3 container d-flex flex-column justify-content-center align-items-center">
           <img src="/public/tweeter-small.svg" alt="Logo" class="mb-3">
-          <h1 class="mb-3">Welcome back</h1>
+          <h3 class="mb-3">Welcome back</h3>
           <input type="email" placeholder="Email" class="form-control mb-3">
-          <input type="password" name="password" id="password" class="form-control mb-3">
+          <input type="password" placeholder="Password" name="password" id="password" class="form-control mb-3">
           <button type="button" class="btn btn-primary w-100 login-button">Log In</button>
         </form>
         <h5>Don't have an account yet?</h5>
-        <button type="button" class="btn btn-primary toggle-button">Register</button>
       </div>
+      <button type="button" class="btn btn-primary toggle-button align-self-center">Log In</button>
     </div>
   </div>
 
@@ -143,25 +144,18 @@
     let toggleButton = document.querySelector(".toggle-button");
 
     function toggleForms(e) {
-      // registerEl.style.display = registerForm.style.display === "none" ? "" : "none";
-      // loginEl.style.display = registerForm.style.display === "none" ? "" : "none";
-      // toggleButtons.forEach(button => button.textContent = button.textContent === "Register" ? "Log In" : "Register");
       let btnContent = e.target.textContent.toLowerCase();
-      e.target.hidden = true;
       if (btnContent === "log in") {
         registerEl.classList.add("d-none");
         loginEl.classList.remove("d-none");
+        e.target.textContent = "Register";
       } else {
         loginEl.classList.add("d-none");
         registerEl.classList.remove("d-none");
+        e.target.textContent = "Log In";
       }
-      toggleButton = document.querySelector(".toggle-button:not([hidden])");
-      toggleButton.addEventListener("click", toggleForms);
-      console.log(toggleButton)
     }
-    // registerToggleBtn.addEventListener("click", toggleForms);
     toggleButton.addEventListener("click", toggleForms);
-
   </script>
 </body>
 
