@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+:root {
+  --primary: rgba(47, 128, 237, 1);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.home-guest-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.home-guest-container .brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(20 113 235);
+  background-image: url("tweeterSmall.svg");
+  background-size: cover;
+  flex: 2;
+  color: white;
+}
+
+.home-guest-container .brand .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.home-guest-container .items-container {
+  list-style: none;
+  padding: 0;
+}
+
+.home-guest-container .item {
+  padding: 1em 0;
+  font-size: 0.75em;
+}
+
+.home-guest-container .item span {
+  padding: 1em;
+}
+
+.home-guest-container .authentication {
+  flex-direction: column;
+  flex: 1;
+  align-self: center;
+  gap: 0.5em;
+}
