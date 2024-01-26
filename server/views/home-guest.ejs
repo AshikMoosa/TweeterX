@@ -28,14 +28,17 @@
     </div>
     <div class="authentication d-flex">
       <div class="register container d-flex flex-column justify-content-center align-items-center">
-        <form action="#" class="mb-3 container d-flex flex-column justify-content-center align-items-center">
+        <form action="/register" method="POST"
+          class="mb-3 container d-flex flex-column justify-content-center align-items-center" id="registration-form">
           <img src="tweeterSmall.svg" alt="Logo-Brand" class="mb-3">
           <h3 class="mb-3">Join Tweeter today</h3>
-          <input type="text" class="form-control mb-3" placeholder="Username">
-          <input type="email" class="form-control mb-3" placeholder="Email">
-          <input type="password" class="form-control mb-3" name="password" placeholder="Password">
-          <input type="password" class="form-control mb-3" name="confirm-password" placeholder="Confirm Password">
-          <button type="button" class="btn btn-primary w-100 register-button">Register</button>
+          <input type="text" class="form-control mb-3" placeholder="Username" name="username" id="username-register">
+          <input type="email" class="form-control mb-3" placeholder="Email" name="email" id="email-register">
+          <input type="password" class="form-control mb-3" placeholder="Password" name="password"
+            id="password-register">
+          <input type="password" class="form-control mb-3" placeholder="Confirm Password" name="confirmPassword"
+            id="confirm-password-register">
+          <button type="submit" class="btn btn-primary w-100 register-button">Register</button>
         </form>
         <h6>Already have an account?</h6>
       </div>
@@ -45,7 +48,7 @@
           <h3 class="mb-3">Welcome back</h3>
           <input type="email" placeholder="Email" class="form-control mb-3">
           <input type="password" placeholder="Password" name="password" class="form-control mb-3">
-          <button type="button" class="btn btn-primary w-100 login-button">Log In</button>
+          <button type="submit" class="btn btn-primary w-100 login-button">Log In</button>
         </form>
         <h6>Don't have an account yet?</h6>
       </div>
