@@ -38,11 +38,11 @@ User.prototype.validate = function () {
 // not all instances will create a register method - optimisation
 User.prototype.register = function () {
   // Validate user data
-  // Only if there are no valid error
-  // Then save user data into database
   this.cleanUp();
   this.validate();
 
+  // Only if there are no valid error
+  // Then save user data into database
   if (!this.errors.length) {
     usersCollection.insertOne(this.data);
   }
