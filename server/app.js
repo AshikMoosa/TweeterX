@@ -15,4 +15,4 @@ app.set("view engine", "ejs");
 // Render Home-Guest Page
 app.use("/", router);
 
-app.listen(3000);
+module.exports = app;
