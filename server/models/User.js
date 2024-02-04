@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs");
 const usersCollection = require("../db").collection("users");
 const validator = require("validator");
 
@@ -44,6 +45,12 @@ User.prototype.register = function () {
   // Only if there are no valid error
   // Then save user data into database
   if (!this.errors.length) {
+    // Hash user password
+    let salt = bcrypt.genSaltSync(10);
+    this.data.password = bcrypt.hashSync(this.data.password, salt);
+    this.data.confirmPassword = bcrypt.hashSync(this.data.confirmPassword, salt);
+
+    // Store user entered data to db
     usersCollection.insertOne(this.data);
   }
 };
@@ -53,7 +60,7 @@ User.prototype.login = async function () {
     this.cleanUp();
     // Mongo Verify username - matching form data with db data
     const attemptedUser = await usersCollection.findOne({ email: this.data.email });
-    if (attemptedUser && attemptedUser.password === this.data.password) {
+    if (attemptedUser && bcrypt.compareSync(this.data.password, attemptedUser.password)) {
       resolve("Congrats! Valid username and password");
     } else {
       reject("Sorry Invalid credentials");
