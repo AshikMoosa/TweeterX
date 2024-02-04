@@ -1,6 +1,8 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const { MongoClient } = require("mongodb");
 
-const client = new MongoClient("mongodb+srv://ashikmoosa96:nG0qYPcPGggjY2ZI@cluster0.ia4df2e.mongodb.net/Tweeter?retryWrites=true&w=majority");
+const client = new MongoClient(process.env.CONNECTIONSTRING)
 
 async function start() {
   await client.connect();
@@ -8,7 +10,7 @@ async function start() {
 
   // We are starting app after loading db, since we dont how much time to create db
   const app = require("./app");
-  app.listen(3000);
+  app.listen(process.env.PORT);
 }
 
 start();
