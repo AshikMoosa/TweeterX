@@ -43,10 +43,11 @@
         <h6>Already have an account?</h6>
       </div>
       <div class="login container d-flex flex-column justify-content-center align-items-center d-none">
-        <form action="#" class="mb-3 container d-flex flex-column justify-content-center align-items-center">
+        <form action="/login" method="POST"
+          class="mb-3 container d-flex flex-column justify-content-center align-items-center">
           <img src="tweeterSmall.svg" alt="Logo" class="mb-3">
           <h3 class="mb-3">Welcome back</h3>
-          <input type="email" placeholder="Email" class="form-control mb-3">
+          <input type="email" placeholder="Email" class="form-control mb-3" name="email">
           <input type="password" placeholder="Password" name="password" class="form-control mb-3">
           <button type="submit" class="btn btn-primary w-100 login-button">Log In</button>
         </form>

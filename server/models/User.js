@@ -48,4 +48,17 @@ User.prototype.register = function () {
   }
 };
 
+User.prototype.login = async function () {
+  return new Promise(async (resolve, reject) => {
+    this.cleanUp();
+    // Mongo Verify username - matching form data with db data
+    const attemptedUser = await usersCollection.findOne({ email: this.data.email });
+    if (attemptedUser && attemptedUser.password === this.data.password) {
+      resolve("Congrats! Valid username and password");
+    } else {
+      reject("Sorry Invalid credentials");
+    }
+  });
+};
+
 module.exports = User;

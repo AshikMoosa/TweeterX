@@ -13,3 +13,15 @@ exports.register = function (req, res) {
     res.send("Validation Success");
   }
 };
+
+exports.login = function (req, res) {
+  let user = new User(req.body);
+  user
+    .login()
+    .then(function (result) {
+      res.send(result);
+    })
+    .catch(function (e) {
+      res.send(e);
+    });
+};
