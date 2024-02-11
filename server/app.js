@@ -1,7 +1,18 @@
 const express = require("express");
+const session = require("express-session");
 const path = require("path");
 const app = express();
 const router = require("./router");
+
+// Setup session
+let sessionOptions = session({
+  secret: "Javascript is sooooo cool",
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 1000 * 60 * 60 * 24, httpOnly: true }
+});
+
+app.use(sessionOptions);
 
 // Read 2 types of form data
 app.use(express.urlencoded({ extended: false }));
