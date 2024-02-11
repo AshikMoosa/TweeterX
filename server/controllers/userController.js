@@ -23,7 +23,7 @@ exports.login = function (req, res) {
   user
     .login()
     .then(function (result) {
-      req.session.user = { favColor: "blue", username: user.data.username };
+      req.session.user = { favColor: "blue", email: user.data.email };
       res.send(result);
     })
     .catch(function (e) {
