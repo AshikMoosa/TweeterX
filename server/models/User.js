@@ -24,15 +24,34 @@ User.prototype.cleanUp = function () {
 };
 
 // Check for all validation rules under here
-User.prototype.validate = function () {
+User.prototype.validate = async function () {
   if (this.data.username === "") this.errors.push("You must provide a username.");
   if (this.data.username.length > 0 && this.data.username.length < 3) this.errors.push("Username must be atleast 3 characters");
+  if (this.data.username.length > 20) this.errors.push("Username cannot exceed 20 characters");
   if (this.data.username !== "" && !validator.isAlphanumeric(this.data.username)) this.errors.push("Username must contain only letters and digits");
-  if (this.data.email === "") this.errors.push("You must provide an email.");
-  if (!validator.isEmail(this.data.email)) this.errors.push("You must provide valid email.");
-  if (this.data.password === "") this.errors.push("You must provide a password.");
+  if (this.data.email === "") this.errors.push("You must provide an email");
+  if (!validator.isEmail(this.data.email)) this.errors.push("You must provide valid email");
+  if (this.data.password === "") this.errors.push("You must provide a password");
   if (this.data.password.length > 0 && this.data.password.length < 6) this.errors.push("Password must be atleast 6 characters");
   if (this.data.confirmPassword !== this.data.password) this.errors.push("Passwords don't match");
+
+  // Only if username is valid then check to see if its already taken
+  if (this.data.username.length > 2 && this.data.username.length < 21 && validator.isAlphanumeric(this.data.username)) {
+    // Checks if username exists in database else null
+    let usernameExists = await usersCollection.findOne({ username: this.data.username });
+    if (usernameExists) {
+      this.errors.push("That username is already taken");
+    }
+  }
+
+  // Only if email is valid then check to see if its already taken
+  if (validator.isEmail(this.data.email)) {
+    // Checks if username exists in database else null
+    let emailExists = await usersCollection.findOne({ email: this.data.email });
+    if (emailExists) {
+      this.errors.push("That email is already taken");
+    }
+  }
 };
 
 // all instances of User will only have access to register method
