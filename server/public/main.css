@@ -57,3 +57,17 @@ body {
   align-self: center;
   gap: 0.5em;
 }
+
+.home-guest-container .authentication #toast {
+  position: relative;
+  top: 2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: opacity 0.5s ease;
+  margin: auto;
+}
+
+.home-guest-container .authentication .error {
+  background-color: #dc3545; /* Red for error */
+  color: #fff;
+}
