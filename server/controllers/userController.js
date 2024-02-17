@@ -4,7 +4,7 @@ exports.home = function (req, res) {
   if (req.session.user) {
     res.render("home-dashboard", { username: req.session.user.username });
   } else {
-    res.render("home-guest", { errors: req.flash("errors") });
+    res.render("home-guest", { errors: req.flash("errors"), regErrors: req.flash("regErrors") });
   }
 };
 
@@ -12,7 +12,14 @@ exports.register = function (req, res) {
   let user = new User(req.body);
   user.register();
   if (user.errors.length) {
-    res.send(user.errors);
+    user.errors.forEach(function (error) {
+      req.flash("regErrors", error);
+    });
+    req.session.save(function () {
+      // Can do redirect outside save but this is expensive operation
+      // and needs to wait to complete
+      res.redirect("/");
+    });
   } else {
     res.send("Validation Success");
   }

@@ -55,14 +55,19 @@
       </div>
       <button type="button" class="btn btn-primary toggle-button align-self-center">Log In</button>
 
-      <!-- Error Authentication Toast -->
-
+      <!-- Error Login Authentication Toast -->
       <% errors.forEach(function(message) { %>
         <div id="toast" class="error">
           <%= message %>
         </div>
         <% }) %>
 
+          <!-- Error Register Authentication Toast -->
+          <% regErrors.forEach(function(message) { %>
+            <div id="toast" class="error">
+              <%= message %>
+            </div>
+            <% }) %>
     </div>
   </div>
 
