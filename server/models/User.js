@@ -59,7 +59,7 @@ User.prototype.login = async function () {
   return new Promise(async (resolve, reject) => {
     this.cleanUp();
     // Mongo Verify username - matching form data with db data
-    const attemptedUser = await usersCollection.findOne({ email: this.data.email });
+    const attemptedUser = await usersCollection.findOne({ username: this.data.username });
     if (attemptedUser && bcrypt.compareSync(this.data.password, attemptedUser.password)) {
       resolve("Congrats! Valid username and password");
     } else {

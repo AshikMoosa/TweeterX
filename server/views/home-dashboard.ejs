@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HomePage</title>
+  <style>
+    /* Header styles */
+    @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+    body {
+      font-family: "Noto Sans", sans-serif;
+      background: rgba(242, 242, 242, 1);
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    main #content-container {
+      padding: 2em 0;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      background-color: rgba(255, 255, 255, 1);
+      /* background-color: lightcoral; */
+      padding: 0 1em;
+    }
+
+    /* Navigation Styles */
+    .navigation {
+      display: inline-flex;
+      flex-direction: column;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .navigation ul {
+      display: inline-flex;
+      column-gap: 3em;
+      padding: 0 1em;
+      margin: 0;
+      list-style: none;
+    }
+
+    .navigation ul li {
+      font-size: 14px;
+      padding: 1.5em;
+      border-bottom: 3px solid transparent;
+      transition: border-bottom-color 0.5s;
+      user-select: none;
+    }
+
+    .navigation ul li[selected] {
+      border-bottom: 3px solid rgba(47, 128, 237, 1);
+      border-radius: 2px;
+      transition-timing-function: ease;
+    }
+
+    .navigation li a {
+      text-decoration: none;
+      color: rgba(130, 130, 130, 1);
+      font-weight: 500;
+    }
+
+    .navigation ul li a:hover {
+      color: rgba(47, 128, 237, 1);
+    }
+
+    .navigation ul li[selected] a {
+      color: rgba(47, 128, 237, 1);
+      font-weight: 600;
+    }
+
+    /* Profile-Menu Styles */
+    .profile-menu {
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+      align-items: end;
+      font-family: "Noto Sans", sans-serif;
+      user-select: none;
+      position: relative;
+    }
+
+    .profile-menu .profile-info {
+      display: inline-flex;
+      column-gap: 8px;
+      align-items: center;
+      transition: display 0.5s;
+    }
+
+    .profile-menu .profile-info:hover {
+      cursor: pointer;
+    }
+
+    .profile-info .profile-img {
+      height: 32px;
+      width: 32px;
+      border-radius: 4px;
+    }
+
+    .profile-info .profile-name {
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .profile-menu .profile-card {
+      background-color: rgba(255, 255, 255, 1);
+      position: absolute;
+      top: 3em;
+      border: 1px solid rgba(224, 224, 224, 1);
+      border-radius: 12px;
+      transition-timing-function: ease;
+    }
+
+    .profile-card ul {
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+      list-style: none;
+      padding: 12px;
+      margin: 0;
+      width: 150px;
+    }
+
+    .profile-card ul hr {
+      height: 1px;
+      width: 100%;
+      background-color: rgba(224, 224, 224, 1);
+    }
+
+    .profile-card ul li {
+      display: inline-flex;
+      column-gap: 8px;
+      align-items: center;
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+    .profile-card ul li:hover {
+      cursor: pointer;
+      background-color: rgba(242, 242, 242, 1);
+    }
+
+    .profile-card ul li .logout {
+      appearance: none;
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      margin: 0;
+      font-size: inherit;
+      color: inherit;
+      text-align: inherit;
+    }
+
+    .profile-card .icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .profile-card .my-profile a {
+      text-decoration: none;
+      color: black;
+    }
+
+    /* Main Home Content Styles */
+    .home-page {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      column-gap: 1em;
+      margin: 0 10%;
+    }
+
+    .home-page .main {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1em;
+      flex: 100%;
+    }
+
+    .home-page .main .tweet-card-container {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1em;
+    }
+
+    .home-page .sidebar {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1em;
+      flex: auto;
+    }
+
+    /* Tweet Form Styles */
+    .tweet-form {
+      display: flex;
+      flex-direction: column;
+      background-color: rgba(255, 255, 255, 1);
+      padding: 1em;
+      border-radius: 12px;
+      font-family: "Noto Sans", sans-serif;
+    }
+
+    .tweet-form form {
+      margin: 0;
+    }
+
+    .tweet-form .title {
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .tweet-form .content {
+      display: flex;
+      column-gap: 1em;
+    }
+
+    .tweet-form .content .profile-img {
+      height: 32px;
+      width: 32px;
+      border-radius: 8px;
+    }
+
+    .tweet-form .content .tweet-area {
+      border: 0;
+      width: 100%;
+    }
+
+    .tweet-form .content .tweet-area:focus-visible {
+      outline: none;
+    }
+
+    .tweet-form .content-controls {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1em;
+      width: 100%;
+    }
+
+    .tweet-form .control-actions {
+      display: flex;
+      justify-content: space-between;
+      column-gap: 1em;
+    }
+
+    .tweet-form .control-actions .left-cta {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      column-gap: 1em;
+      position: relative;
+      width: 100%;
+    }
+
+    .tweet-form .control-actions .left-cta .upload-media,
+    .tweet-form .control-actions .left-cta .reply-actions {
+      color: rgba(47, 128, 237, 1);
+      user-select: none;
+    }
+
+    .tweet-form .control-actions .left-cta .upload-media:hover {
+      cursor: pointer;
+    }
+
+    .tweet-form .control-actions .left-cta .reply-actions:hover {
+      cursor: pointer;
+    }
+
+    .tweet-form .control-actions .left-cta .title {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .tweet-form .control-actions .reply-card {
+      font-size: 12px;
+      background-color: rgba(255, 255, 255, 1);
+      position: absolute;
+      top: 3em;
+      border: 1px solid rgba(224, 224, 224, 1);
+      border-radius: 12px;
+      transition-timing-function: ease;
+      padding: 12px;
+    }
+
+    .tweet-form .reply-card h2 {
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      margin: 5px 0;
+    }
+
+    .tweet-form .reply-card p {
+      font-weight: 400;
+      font-size: 12px;
+      margin: 5px 0;
+    }
+
+    .tweet-form .reply-card ul {
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tweet-form .reply-card li {
+      display: inline-flex;
+      column-gap: 8px;
+      align-items: center;
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+    .tweet-form .reply-card li:hover {
+      cursor: pointer;
+      background-color: rgb(242, 242, 242);
+    }
+
+    .tweet-form .control-actions button {
+      background-color: rgba(47, 128, 237, 1);
+      color: rgba(255, 255, 255, 1);
+      padding: 0.5em 1em;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .tweet-form .control-actions button:hover {
+      cursor: pointer;
+      background-color: rgba(47, 128, 237, 0.95);
+    }
+
+    /* Tweet Card Styles */
+
+    .tweet-card {
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.05);
+      padding: 1em;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 1);
+      font-family: "Noto Sans", sans-serif;
+      font-weight: 500;
+      /* width: 600px; */
+    }
+
+    .tweet-card .profile-info {
+      display: flex;
+      flex-direction: row;
+      column-gap: 1em;
+    }
+
+    .tweet-card .profile-info .profile-img {
+      height: 40px;
+      width: 40px;
+      border-radius: 8px;
+    }
+
+    .tweet-card .profile-info .profile-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tweet-card .profile-info .profile-details:hover {
+      cursor: pointer;
+    }
+
+    .tweet-card .profile-details .name {
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0;
+      color: rgba(0, 0, 0, 1);
+    }
+
+    .tweet-card .profile-details .time-stamp {
+      font-family: "Noto Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      margin: 0;
+      color: rgba(189, 189, 189, 1);
+    }
+
+    .tweet-card .tweet-cover-info {
+      display: inline-flex;
+      flex-direction: column;
+    }
+
+    .tweet-card .tweet-cover-info .tweet-description {
+      font-family: "Noto Sans", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      /* margin: 0; */
+      color: rgba(79, 79, 79, 1);
+    }
+
+    .tweet-card .tweet-cover-info .cover-img {
+      /* height: 350px; */
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .tweet-card .tweet-cover-info .cover-details {
+      display: inline-flex;
+      flex-direction: row;
+      align-self: flex-end;
+      column-gap: 1em;
+      font-family: "Noto Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(189, 189, 189, 1);
+      margin: 0.5em 0;
+    }
+
+    .tweet-card .tweet-cover-info .cover-controls {
+      display: inline-flex;
+      flex-direction: row;
+      justify-content: space-around;
+      column-gap: 1em;
+      margin: 0.5em 0;
+      border-top: 1px solid rgba(242, 242, 242, 1);
+      border-bottom: 1px solid rgba(242, 242, 242, 1);
+      padding: 0.25em 0;
+    }
+
+    .tweet-card .cover-controls button {
+      flex: 1;
+      background-color: transparent;
+      border: 0;
+      padding: 1em;
+      font-family: "Noto Sans", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(79, 79, 79, 1);
+    }
+
+    .tweet-card .cover-controls button:hover {
+      background-color: rgba(242, 242, 242, 1);
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .tweet-card .cover-controls svg {
+      margin-inline-end: 1em;
+      color: rgba(79, 79, 79, 1);
+    }
+
+    .tweet-card .tweet-reply-container {
+      display: inline-flex;
+      flex-direction: column;
+    }
+
+    .tweet-card .tweet-reply-form {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: center;
+      column-gap: 1em;
+      padding: 0.5em 0;
+    }
+
+    .tweet-card .tweet-reply-form .profile-img {
+      height: 40px;
+      width: 40px;
+      border-radius: 8px;
+    }
+
+    .tweet-card .tweet-reply-form .tweet-reply-control-container {
+      display: inline-flex;
+      height: 40px;
+      width: 100%;
+      border: 1px solid rgba(242, 242, 242, 1);
+      border-radius: 8px;
+      font-family: "Noto Sans", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(189, 189, 189, 1);
+    }
+
+    .tweet-card .tweet-reply-form .tweet-reply-input {
+      border: 0;
+      width: 100%;
+      margin: 2px;
+    }
+
+    .tweet-card .tweet-reply-form .tweet-reply-input:focus-visible {
+      outline: 0;
+    }
+
+    .tweet-card .tweet-reply-control-container .upload-media {
+      border: 0;
+      background-color: transparent;
+      padding: 1em;
+    }
+
+    .tweet-card .tweet-reply-control-container .upload-media:hover {
+      cursor: pointer;
+    }
+
+    .tweet-card .tweet-reply-item {
+      display: inline-flex;
+      flex-direction: row;
+      column-gap: 1em;
+      padding: 1em 0;
+    }
+
+    .tweet-card .tweet-reply-item .profile-img {
+      height: 40px;
+      width: 40px;
+      border-radius: 8px;
+    }
+
+    .tweet-card .tweet-reply-item .reply-content {
+      display: inline-flex;
+      flex-direction: column;
+    }
+
+    .tweet-card .reply-content .reply-profile-info {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: center;
+      column-gap: 1em;
+    }
+
+    .tweet-card .reply-profile-info .name {
+      font-family: "Poppins", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 1);
+    }
+
+    .tweet-card .reply-profile-info .time-stamp {
+      font-family: "Noto Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(189, 189, 189, 1);
+    }
+
+    .tweet-card .reply-msg .reply-msg-description {
+      font-family: "Noto Sans", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(79, 79, 79, 1);
+      overflow-wrap: break-word;
+    }
+
+    .tweet-card .reply-msg .reply-msg-cover {
+      height: 250px;
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .tweet-card .tweet-reply-item .reply-controls {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: center;
+      column-gap: 1em;
+      padding: 1em 0;
+      font-family: "Noto Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(189, 189, 189, 1);
+    }
+
+    .tweet-card .reply-controls .like {
+      background-color: transparent;
+      padding: 1em;
+      border: 0;
+    }
+
+    .tweet-card .reply-controls .like:hover {
+      cursor: pointer;
+    }
+
+    .tweet-card .reply-controls .like svg {
+      margin-inline-end: 0.5em;
+    }
+
+    /* Trends Styles */
+
+    .trends {
+      display: flex;
+      flex-direction: column;
+      background-color: rgba(255, 255, 255, 1);
+      padding: 1em;
+      border-radius: 12px;
+      font-family: "Noto Sans", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .trends .title {
+      font-family: "Poppins", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(79, 79, 79, 1);
+    }
+
+    .trends hr {
+      width: 100%;
+      background-color: rgba(224, 224, 224, 1);
+    }
+
+    .trends ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .trends .trends-list-item {
+      padding: 0.5em;
+      border-radius: 8px;
+      user-select: none;
+    }
+
+    .trends .trends-list-item:hover {
+      cursor: pointer;
+      background-color: rgba(242, 242, 242, 1);
+    }
+
+    .trends-list-item h3,
+    .trends-list-item p {
+      margin: 5px 0;
+    }
+
+    .trends-list-item h3 {
+      font-size: 16px;
+      color: rgba(51, 51, 51, 1);
+    }
+
+    .trends-list-item p {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(130, 130, 130, 1);
+    }
+
+    /* Recommendations Styles */
+
+    .recommendations {
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.05);
+      padding: 1em;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 1);
+      font-family: "Noto Sans", sans-serif;
+      font-weight: 500;
+    }
+
+    .recommendations .title {
+      font-family: "Poppins", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .recommendations .recommendation-item {
+      display: inline-flex;
+      flex-direction: column;
+      padding: 0.5em 0;
+      /* width: 300px; */
+    }
+
+    .recommendations .recommendation-item hr {
+      width: 100%;
+      margin: 5px 0;
+    }
+
+    .recommendations .profile-info {
+      display: inline-flex;
+      flex-direction: row;
+      column-gap: 1em;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .recommendations .profile-details {
+      display: inline-flex;
+      column-gap: 0.5em;
+      align-items: center;
+    }
+
+    .recommendations .profile-info .profile-img {
+      height: 32px;
+      width: 32px;
+      border-radius: 8px;
+    }
+
+    .recommendations .profile-info p {
+      margin: 2px 0;
+    }
+
+    .recommendations .profile-info .name {
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .recommendations .profile-info .follower-count {
+      font-family: "Noto Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(130, 130, 130, 1);
+    }
+
+    .recommendations .profile-info .follow-button {
+      font-family: "Noto Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 0.5em 1em;
+      background-color: rgba(47, 128, 237, 1);
+      color: rgba(255, 255, 255, 1);
+      border-radius: 4px;
+      border: 0;
+    }
+
+    .recommendations .profile-info .follow-button:hover {
+      cursor: pointer;
+      background-color: rgba(47, 128, 237, 0.95);
+    }
+
+    .recommendations .profile-info .follow-button svg {
+      padding-inline-start: 0.5em;
+    }
+
+    .recommendations .profile-description {
+      font-size: 14px;
+      color: rgba(130, 130, 130, 1);
+      overflow-wrap: break-word;
+      /* width: 250px; */
+    }
+
+    .recommendations .profile-cover {
+      height: 100px;
+      /* width: 250px; */
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header Section -->
+  <section class="header">
+    <div class="logo">
+      <a href="/">
+        <img src="/src/assets/tweeter.svg" alt="tweeter-logo">
+      </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+      <ul>
+        <li class="navigation-list"><a href="/" class="navigation-link">Home</a></li>
+        <li class="navigation-list"><a href="explore" class="navigation-link">Explore</a></li>
+        <li class="navigation-list"><a href="bookmarks" class="navigation-link">Bookmarks</a></li>
+      </ul>
+    </nav>
+
+    <!-- Profile -->
+    <div class="profile-menu">
+      <div class="profile-info">
+        <img src="/src/assets/profile1.jpg" class="profile-img" alt="profile-img">
+        <h2 class="profile-name">
+          <%= username %>
+        </h2>
+        <span class="drop-icon">
+          <i class="fa-solid fa-caret-down"></i>
+        </span>
+      </div>
+
+      <div class="profile-card" hidden>
+        <ul>
+          <li>
+            <span class="icon"><i class="fa-solid fa-circle-user"></i></span>
+            <span class="my-profile"><a href="profile" class="navigation-link">My Profile</a></span>
+          </li>
+          <li>
+            <span class="icon"><i class="fa-solid fa-user-group"></i></span>
+            <span class="group-chat">Group Chat</span>
+          </li>
+          <li>
+            <span class="icon"><i class="fa-solid fa-gear"></i></span>
+            <span class="settings">Settings</span>
+          </li>
+          <hr>
+          <li>
+            <span class="icon"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
+            <form action="/logout" method="POST">
+              <button class="logout">Logout</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Home Content Section -->
+  <main>
+    <section id="content-container">
+
+
+      <section class="home-page">
+        <section class="main">
+          <div id="tweet-form-container">
+            <div class="tweet-form">
+              <form action="#">
+                <div class="form-container">
+                  <h2 class="title">Tweet something</h2>
+                  <hr>
+                  <div class="content">
+                    <img class="profile-img" src="/src/assets/profile1.jpg" alt="profile-img">
+                    <div class="content-controls">
+                      <textarea placeholder="What's happening?" name="tweet-area" class="tweet-area"
+                        id="tweet-area"></textarea>
+                      <div class="control-actions">
+                        <div class="left-cta">
+                          <span class="upload-media" id="uploadMedia"><i class="fa-regular fa-image"></i></span>
+                          <input type="file" id="fileInput" style="display:none">
+                          <span class="reply-actions">
+                            <span class="icon"><i class="fa-solid fa-earth-asia"></i></span>
+                            <span class="title">Everyone can reply</span>
+                          </span>
+                          <div class="reply-card" hidden>
+                            <h2>Who can reply</h2>
+                            <p>Choose who can reply to this Tweet.</p>
+                            <ul>
+                              <li>
+                                <span class="icon"><i class="fa-solid fa-earth-asia"></i></span>
+                                <span class="title">Everyone</span>
+                              </li>
+                              <li>
+                                <span class="icon"><i class="fa-solid fa-user-group"></i></span>
+                                <span class="title">People you follow</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <button type="button">Tweet</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div id="tweet-card-container">
+
+            <div class="tweet-card">
+              <div class="profile-info">
+                <img src="/src/assets/profile1.jpg" alt="profile-img" class="profile-img">
+                <div class="profile-details">
+                  <span class="name">Cristina Neal</span>
+                  <span class="time-stamp">24 August at 20:43</span>
+                </div>
+              </div>
+
+
+              <div class="tweet-cover-info">
+                <p class="tweet-description">“We travel, some of us forever, to seek other places, other lives, other
+                  souls.”
+                  –
+                  Anais Nin</p>
+                <img src="/src/assets/profile-cover.jpg" alt="cover-img" class="cover-img">
+                <div class="cover-details">
+                  <span class="comments-count">449 Comments</span>
+                  <span class="retweets-count">59k Retweets</span>
+                  <span class="saved-count">234 Saved</span>
+                </div>
+                <div class="cover-controls">
+                  <button class="comment"><i class="fa-regular fa-message fa-flip-horizontal"></i>Comment</button>
+                  <button class="retweet"><i class="fa-solid fa-retweet"></i>Retweet</button>
+                  <button class="like"><i class="fa-regular fa-heart"></i>Like</button>
+                  <button class="save"><i class="fa-regular fa-bookmark"></i>Save</button>
+                </div>
+              </div>
+
+              <div class="tweet-reply-container">
+                <div class="tweet-reply-form">
+                  <img src="/src/assets/profile1.jpg" alt="profile-img" class="profile-img">
+                  <div class="tweet-reply-control-container">
+                    <input type="text" placeholder="Tweet your reply" class="tweet-reply-input"
+                      name="tweet-reply-control" id="tweet-reply-control">
+                    <button class="upload-media" id="uploadMedia"><i class="fa-regular fa-image"></i></button>
+                    <input type="file" id="fileInput" style="display:none">
+                  </div>
+                </div>
+
+                <div class="tweet-reply-item">
+                  <img src="/src/assets/profile1.jpg" alt="profile-img" class="profile-img">
+                  <div class="reply-content">
+                    <div class="reply-profile-info">
+                      <span class="name">Cristina Neal</span>
+                      <span class="time-stamp">24 August at 20:43</span>
+                    </div>
+                    <div class="reply-msg">
+                      <p class="reply-msg-description">I’ve seen awe-inspiring things that I thought I’d never be able
+                        to
+                        explain
+                        to another person.</p>
+                      <img src="/src/assets/profile-cover.jpg" alt="reply-cover" class="reply-msg-cover">
+                    </div>
+                    <div class="reply-controls">
+                      <button class="like"><i class="fa-regular fa-heart"></i>Like</button>
+                      <span class="likes-count">12k Likes</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+        <aside class="sidebar">
+          <div id="trends-container">
+            <div class="trends">
+              <h2 class="title">Trends for you</h2>
+              <hr>
+              <ul>
+                <li class="trends-list-item">
+                  <h3>#programming</h3>
+                  <p>213k Tweets</p>
+                </li>
+                <li class="trends-list-item">
+                  <h3>#devchallenges</h3>
+                  <p>123k Tweets</p>
+                </li>
+                <li class="trends-list-item">
+                  <h3>#frontend</h3>
+                  <p>34k Tweets</p>
+                </li>
+                <li class="trends-list-item">
+                  <h3>#helsinki</h3>
+                  <p>11k Tweets</p>
+                </li>
+                <li class="trends-list-item">
+                  <h3>#100DaysOfCode</h3>
+                  <p>5k Tweets</p>
+                </li>
+                <li class="trends-list-item">
+                  <h3>#learntocode</h3>
+                  <p>1k Tweets</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="recommendations-container">
+
+            <div class="recommendations">
+              <h2 class="title">Who to follow</h2>
+              <div class="recommendation-item">
+                <hr>
+                <div class="profile-info">
+                  <div class="profile-details">
+                    <img src="/src/assets/profile1.jpg" alt="profile-img" class="profile-img">
+                    <div>
+                      <p class="name">Mikael Stanley</p>
+                      <p class="follower-count">230k followers</p>
+                    </div>
+                  </div>
+                  <button type="button" class="follow-button"><i
+                      class="fa-solid fa-user-plus fa-flip-horizontal"></i>Follow</button>
+                </div>
+                <p class="profile-description">Photographer & Filmmaker based in Copenhagen, Denmark ✵ 🇩🇰</p>
+                <img src="/src/assets/profile-cover.jpg" alt="profile-cover-img" class="profile-cover">
+              </div>
+              <div class="recommendation-item">
+                <hr>
+                <div class="profile-info">
+                  <div class="profile-details">
+                    <img src="/src/assets/profile1.jpg" alt="profile-img" class="profile-img">
+                    <div>
+                      <p class="name">Mikael Stanley</p>
+                      <p class="follower-count">230k followers</p>
+                    </div>
+                  </div>
+                  <button type="button" class="follow-button"><i
+                      class="fa-solid fa-user-plus fa-flip-horizontal"></i>Follow</button>
+                </div>
+                <p class="profile-description">Photographer & Filmmaker based in Copenhagen, Denmark ✵ 🇩🇰</p>
+                <img src="/src/assets/profile-cover.jpg" alt="profile-cover-img" class="profile-cover">
+              </div>
+
+            </div>
+          </div>
+        </aside>
+      </section>
+    </section>
+  </main>
+  <script>
+
+    const navigationContainer = document.querySelector(".navigation");
+    const navigationLists = document.querySelectorAll(".navigation-list");
+    const navigationLinks = document.querySelectorAll(".navigation-link");
+    const profileElem = document.querySelector(".profile-menu");
+    const profileInfo = document.querySelector(".profile-info");
+    const profileCard = document.querySelector(".profile-card");
+
+    // Handle navigation link clicks - TODO
+
+
+    // Handle Profile Menu Dropdown
+    // Toggle the card visibility
+    function toggleCard() {
+      profileCard.hidden = profileCard.hidden === true ? false : true;
+    }
+
+    // Show profile-card when profile-info is clicked
+    profileInfo.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleCard();
+    });
+
+    // Hide profile-card when user clicks outside
+    document.addEventListener("click", function (event) {
+      if (!profileCard.contains(event.target) && event.target !== profileInfo) {
+        profileCard.hidden = true;
+      }
+    });
+
+  </script>
+</body>
+
+</html>

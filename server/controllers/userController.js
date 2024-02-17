@@ -2,7 +2,7 @@ const User = require("../models/User");
 
 exports.home = function (req, res) {
   if (req.session.user) {
-    res.send("Welcome to actual App");
+    res.render("home-dashboard", { username: req.session.user.username });
   } else {
     res.render("home-guest");
   }
@@ -23,10 +23,22 @@ exports.login = function (req, res) {
   user
     .login()
     .then(function (result) {
-      req.session.user = { favColor: "blue", email: user.data.email };
-      res.send(result);
+      req.session.user = { favColor: "blue", username: user.data.username };
+      req.session.save(function () {
+        // Can do redirect outside save but this is expensive operation
+        // and needs to wait to complete
+        res.redirect("/");
+      });
     })
     .catch(function (e) {
       res.send(e);
     });
+};
+
+exports.logout = function (req, res) {
+  req.session.destroy(function () {
+    // Can do redirect outside destroy but this is expensive operation
+    // and needs to wait to complete
+    res.redirect("/");
+  });
 };
