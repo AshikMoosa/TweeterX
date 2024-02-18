@@ -104,14 +104,15 @@
     }
 
     .profile-info .profile-img {
-      height: 32px;
-      width: 32px;
+      height: 24px;
+      width: 24px;
       border-radius: 4px;
     }
 
     .profile-info .profile-name {
       font-weight: 700;
       font-size: 12px;
+      text-transform: capitalize;
     }
 
     .profile-menu .profile-card {
@@ -159,8 +160,14 @@
       padding: 0;
       margin: 0;
       font-size: inherit;
+      font-family: inherit;
       color: inherit;
       text-align: inherit;
+    }
+
+    .profile-card ul li .logout:hover {
+      cursor: pointer;
+      background-color: rgba(242, 242, 242, 1);
     }
 
     .profile-card .icon svg {
@@ -770,7 +777,7 @@
     <!-- Profile -->
     <div class="profile-menu">
       <div class="profile-info">
-        <img src="/src/assets/profile1.jpg" class="profile-img" alt="profile-img">
+        <img src="avatar.svg" class="profile-img" alt="profile-img">
         <h2 class="profile-name">
           <%= username %>
         </h2>
