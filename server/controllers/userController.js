@@ -10,19 +10,26 @@ exports.home = function (req, res) {
 
 exports.register = function (req, res) {
   let user = new User(req.body);
-  user.register();
-  if (user.errors.length) {
-    user.errors.forEach(function (error) {
-      req.flash("regErrors", error);
+  user
+    .register()
+    .then(() => {
+      req.session.user = { username: user.data.username };
+      req.session.save(function () {
+        // Can do redirect outside save but this is expensive operation
+        // and needs to wait to complete
+        res.redirect("/");
+      });
+    })
+    .catch((regErrors) => {
+      regErrors.forEach(function (error) {
+        req.flash("regErrors", error);
+      });
+      req.session.save(function () {
+        // Can do redirect outside save but this is expensive operation
+        // and needs to wait to complete
+        res.redirect("/");
+      });
     });
-    req.session.save(function () {
-      // Can do redirect outside save but this is expensive operation
-      // and needs to wait to complete
-      res.redirect("/");
-    });
-  } else {
-    res.send("Validation Success");
-  }
 };
 
 exports.login = function (req, res) {
