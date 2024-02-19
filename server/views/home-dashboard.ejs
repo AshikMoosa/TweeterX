@@ -821,12 +821,12 @@
         <section class="main">
           <div id="tweet-form-container">
             <div class="tweet-form">
-              <form action="#">
+              <form action="/create-post" method="POST">
                 <div class="form-container">
                   <h2 class="title">Tweet something</h2>
                   <hr>
                   <div class="content">
-                    <img class="profile-img" src="/src/assets/profile1.jpg" alt="profile-img">
+                    <img class="profile-img" src="avatar.svg" alt="profile-img">
                     <div class="content-controls">
                       <textarea placeholder="What's happening?" name="tweet-area" class="tweet-area"
                         id="tweet-area"></textarea>
@@ -853,7 +853,7 @@
                             </ul>
                           </div>
                         </div>
-                        <button type="button">Tweet</button>
+                        <button type="submit">Tweet</button>
                       </div>
                     </div>
                   </div>

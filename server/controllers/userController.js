@@ -1,5 +1,18 @@
 const User = require("../models/User");
 
+exports.mustBeLoggedIn = function (req, res, next) {
+  if (req.session.user) {
+    next();
+  } else {
+    req.flash("errors", "You must be logged in to perform that action!");
+    req.session.save(function () {
+      // Can do redirect outside save but this is expensive operation
+      // and needs to wait to complete
+      res.redirect("/");
+    });
+  }
+};
+
 exports.home = function (req, res) {
   if (req.session.user) {
     res.render("home-dashboard", { username: req.session.user.username });
