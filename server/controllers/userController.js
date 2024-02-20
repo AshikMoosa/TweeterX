@@ -26,7 +26,7 @@ exports.register = function (req, res) {
   user
     .register()
     .then(() => {
-      req.session.user = { username: user.data.username };
+      req.session.user = { username: user.data.username, _id: user.data._id };
       req.session.save(function () {
         // Can do redirect outside save but this is expensive operation
         // and needs to wait to complete
@@ -50,7 +50,7 @@ exports.login = function (req, res) {
   user
     .login()
     .then(function (result) {
-      req.session.user = { favColor: "blue", username: user.data.username };
+      req.session.user = { favColor: "blue", username: user.data.username, _id: user.data._id };
       req.session.save(function () {
         // Can do redirect outside save but this is expensive operation
         // and needs to wait to complete
