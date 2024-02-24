@@ -12,3 +12,7 @@ exports.create = function (req, res) {
       res.send(errors);
     });
 };
+
+exports.viewSingle = function (req, res) {
+  res.render("single-post-screen");
+};
