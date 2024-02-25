@@ -507,7 +507,9 @@
             <div class="profile-info">
               <img src="/avatar.svg" alt="profile-img" class="profile-img">
               <div class="profile-details">
-                <span class="name">Cristina Neal</span>
+                <span class="name" style="text-transform: capitalize;">
+                  <%= post.author.username %>
+                </span>
                 <span class="time-stamp">
                   <%= post.createdDate.toDateString() %>
                 </span>
