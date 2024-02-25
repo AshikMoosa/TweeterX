@@ -74,3 +74,11 @@ exports.logout = function (req, res) {
     res.redirect("/");
   });
 };
+
+exports.ifUserExists = function (req, res, next) {
+  next();
+};
+
+exports.profilePostsScreen = function (req, res) {
+  res.render("profile");
+};
