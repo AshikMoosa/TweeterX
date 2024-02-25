@@ -32,7 +32,7 @@
       <div class="profile-info">
         <img src="/avatar.svg" class="profile-img" alt="profile-img">
         <h2 class="profile-name">
-          Bradyboy
+          <%= profileUsername %>
         </h2>
         <span class="drop-icon">
           <i class="fa-solid fa-caret-down"></i>
@@ -77,7 +77,9 @@
         <div class="user-info">
           <div class="user-details">
             <div class="details-container">
-              <h2 class="title">Cristina Neal</h2>
+              <h2 class="title" style="text-transform: capitalize;">
+                <%= profileUsername %>
+              </h2>
               <span class="following-count"><b>2569</b> Following</span>
               <span class="follower-count"><b>10.8K</b> Followers</span>
             </div>
