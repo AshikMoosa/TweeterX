@@ -1,5 +1,5 @@
 const postsCollection = require("../db").db().collection("posts");
-const { ObjectId } = require("mongodb");
+const { ObjectId, FindCursor } = require("mongodb");
 
 let Post = function (data, userid) {
   this.data = data;
@@ -42,6 +42,21 @@ Post.prototype.create = function () {
         });
     } else {
       reject(this.errors);
+    }
+  });
+};
+
+Post.findSingleById = function (id) {
+  return new Promise(async function (resolve, reject) {
+    if (typeof id !== "string" || !ObjectId.isValid(id)) {
+      reject();
+      return;
+    }
+    let post = await postsCollection.findOne({ _id: new ObjectId(id) });
+    if (post) {
+      resolve(post);
+    } else {
+      reject();
     }
   });
 };

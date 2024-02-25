@@ -37,6 +37,11 @@
       padding: 0 1em;
     }
 
+    .header .logo:focus-visible,
+    .header .logo a:focus-visible {
+      outline: none;
+    }
+
     /* Navigation Styles */
     .navigation {
       display: inline-flex;
@@ -181,6 +186,12 @@
     }
 
     /* Tweet Card Styles */
+
+    .single-post-page {
+      margin: 0 20%;
+      display: grid;
+      grid-template-columns: auto;
+    }
 
     .tweet-card {
       display: flex;
@@ -485,49 +496,55 @@
 
 
   <!-- TweetPost Section -->
-  <div id="tweet-card-container">
-
-    <div class="tweet-card">
-      <div class="profile-info">
-        <img src="/avatar.svg" alt="profile-img" class="profile-img">
-        <div class="profile-details">
-          <span class="name">Cristina Neal</span>
-          <span class="time-stamp">24 August at 20:43</span>
-        </div>
-      </div>
+  <main>
+    <section id="content-container">
+      <section class="single-post-page">
 
 
-      <div class="tweet-cover-info">
-        <p class="tweet-description">“We travel, some of us forever, to seek other places, other lives, other
-          souls.”
-          –
-          Anais Nin</p>
-        <img src="/profileCover.jpg" alt="cover-img" class="cover-img">
-        <div class="cover-details">
-          <span class="comments-count">449 Comments</span>
-          <span class="retweets-count">59k Retweets</span>
-          <span class="saved-count">234 Saved</span>
-        </div>
-        <div class="cover-controls">
-          <button class="comment"><i class="fa-regular fa-message fa-flip-horizontal"></i>Comment</button>
-          <button class="retweet"><i class="fa-solid fa-retweet"></i>Retweet</button>
-          <button class="like"><i class="fa-regular fa-heart"></i>Like</button>
-          <button class="save"><i class="fa-regular fa-bookmark"></i>Save</button>
-        </div>
-      </div>
+        <div id="tweet-card-container">
 
-      <div class="tweet-reply-container">
-        <div class="tweet-reply-form">
-          <img src="/avatar.svg" alt="profile-img" class="profile-img">
-          <div class="tweet-reply-control-container">
-            <input type="text" placeholder="Tweet your reply" class="tweet-reply-input" name="tweet-reply-control"
-              id="tweet-reply-control">
-            <button class="upload-media" id="uploadMedia"><i class="fa-regular fa-image"></i></button>
-            <input type="file" id="fileInput" style="display:none">
-          </div>
-        </div>
+          <div class="tweet-card">
+            <div class="profile-info">
+              <img src="/avatar.svg" alt="profile-img" class="profile-img">
+              <div class="profile-details">
+                <span class="name">Cristina Neal</span>
+                <span class="time-stamp">
+                  <%= post.createdDate.toDateString() %>
+                </span>
+              </div>
+            </div>
 
-        <div class="tweet-reply-item">
+
+            <div class="tweet-cover-info">
+              <p class="tweet-description">
+                <%= post.body %>
+              </p>
+              <img src="/profileCover.jpg" alt="cover-img" class="cover-img">
+              <div class="cover-details">
+                <span class="comments-count">449 Comments</span>
+                <span class="retweets-count">59k Retweets</span>
+                <span class="saved-count">234 Saved</span>
+              </div>
+              <div class="cover-controls">
+                <button class="comment"><i class="fa-regular fa-message fa-flip-horizontal"></i>Comment</button>
+                <button class="retweet"><i class="fa-solid fa-retweet"></i>Retweet</button>
+                <button class="like"><i class="fa-regular fa-heart"></i>Like</button>
+                <button class="save"><i class="fa-regular fa-bookmark"></i>Save</button>
+              </div>
+            </div>
+
+            <div class="tweet-reply-container">
+              <div class="tweet-reply-form">
+                <img src="/avatar.svg" alt="profile-img" class="profile-img">
+                <div class="tweet-reply-control-container">
+                  <input type="text" placeholder="Tweet your reply" class="tweet-reply-input" name="tweet-reply-control"
+                    id="tweet-reply-control">
+                  <button class="upload-media" id="uploadMedia"><i class="fa-regular fa-image"></i></button>
+                  <input type="file" id="fileInput" style="display:none">
+                </div>
+              </div>
+
+              <!-- <div class="tweet-reply-item">
           <img src="/avatar.svg" alt="profile-img" class="profile-img">
           <div class="reply-content">
             <div class="reply-profile-info">
@@ -546,11 +563,14 @@
               <span class="likes-count">12k Likes</span>
             </div>
           </div>
-        </div>
-      </div>
+        </div> -->
+            </div>
 
-    </div>
-  </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
 </body>
 
 </html>
