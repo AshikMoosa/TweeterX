@@ -46,26 +46,20 @@ Post.prototype.create = function () {
   });
 };
 
-Post.findSingleById = function (id) {
+Post.reusablePostQuery = function (uniqueOperations) {
   return new Promise(async function (resolve, reject) {
-    if (typeof id !== "string" || !ObjectId.isValid(id)) {
-      reject();
-      return;
-    }
-    // let post = await postsCollection.findOne({ _id: new ObjectId(id) });
-    let posts = await postsCollection
-      .aggregate([
-        { $match: { _id: new ObjectId(id) } },
-        { $lookup: { from: "users", localField: "author", foreignField: "_id", as: "authorDocument" } },
-        {
-          $project: {
-            body: 1,
-            createdDate: 1,
-            author: { $arrayElemAt: ["$authorDocument", 0] }
-          }
+    let aggOperations = uniqueOperations.concat([
+      { $lookup: { from: "users", localField: "author", foreignField: "_id", as: "authorDocument" } },
+      {
+        $project: {
+          body: 1,
+          createdDate: 1,
+          author: { $arrayElemAt: ["$authorDocument", 0] }
         }
-      ])
-      .toArray();
+      }
+    ]);
+
+    let posts = await postsCollection.aggregate(aggOperations).toArray();
 
     // cleanup author property in each post object
     posts = posts.map(function (post) {
@@ -74,12 +68,30 @@ Post.findSingleById = function (id) {
       };
       return post;
     });
+
+    resolve(posts);
+  });
+};
+
+Post.findSingleById = function (id) {
+  return new Promise(async function (resolve, reject) {
+    if (typeof id !== "string" || !ObjectId.isValid(id)) {
+      reject();
+      return;
+    }
+
+    let posts = await Post.reusablePostQuery([{ $match: { _id: new ObjectId(id) } }]);
+
     if (posts.length) {
       resolve(posts[0]);
     } else {
       reject();
     }
   });
+};
+
+Post.findByAuthorId = function (authorId) {
+  return Post.reusablePostQuery([{ $match: { author: authorId } }, { $sort: { createdDate: -1 } }]);
 };
 
 module.exports = Post;

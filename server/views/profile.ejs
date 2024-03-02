@@ -95,8 +95,60 @@
         </div>
       </div>
     </section>
-    <section class="bookmarks" style="border: 1px solid black;">
-      <span>this is bookmark section</span>
+
+    <section class="sidebar-section">
+      <aside class="sidebar">
+        <div class="tweet-list-container">
+          <div class="tweet-list">
+            <ul>
+              <li class="tweet-list-item" selected>Tweets</li>
+              <li class="tweet-list-item">Tweets & replies</li>
+              <li class="tweet-list-item">Media</li>
+              <li class="tweet-list-item">Likes</li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+      <div class="tweet-saved">
+        <% posts.forEach(function(post) { %>
+          <a class="tweet-card-container" href="/post/<%= post._id %>">
+
+            <div class="tweet-card">
+              <div class="profile-info">
+                <img src="/profile1.jpg" alt="profile-img" class="profile-img">
+                <div class="profile-details">
+                  <span class="name" style="text-transform: capitalize;">
+                    <%= profileUsername %>
+                  </span>
+                  <span class="time-stamp">
+                    <%= post.createdDate.toDateString() %>
+                  </span>
+                </div>
+              </div>
+
+
+              <div class="tweet-cover-info">
+                <p class="tweet-description">
+                  <%= post.body %>
+                </p>
+                <img src="/profileCover.jpg" alt="cover-img" class="cover-img">
+                <div class="cover-details">
+                  <span class="comments-count">449 Comments</span>
+                  <span class="retweets-count">59k Retweets</span>
+                  <span class="saved-count">234 Saved</span>
+                </div>
+                <!-- <div class="cover-controls">
+                <button class="comment"><i class="fa-regular fa-message fa-flip-horizontal"></i>Comment</button>
+                <button class="retweet"><i class="fa-solid fa-retweet"></i>Retweet</button>
+                <button class="like"><i class="fa-regular fa-heart"></i>Like</button>
+                <button class="save"><i class="fa-regular fa-bookmark"></i>Save</button>
+              </div> -->
+              </div>
+
+            </div>
+          </a>
+          <% }) %>
+      </div>
     </section>
   </section>
 </body>

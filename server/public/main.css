@@ -921,3 +921,83 @@ main #content-container {
   align-self: flex-start;
   width: 60%;
 }
+
+/* Profile sidebar */
+
+.sidebar-section {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  column-gap: 1em;
+  margin: 0 10%;
+}
+
+/* .sidebar-section .main {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  flex: 100%;
+} */
+
+.sidebar-section .tweet-saved {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+}
+
+.sidebar-section .tweet-card-container {
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+  row-gap: 1em;
+  text-decoration: none;
+}
+
+.sidebar-section .tweet-card-container:hover {
+  cursor: pointer;
+}
+
+.sidebar-section .sidebar {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  /* flex: auto; */
+}
+
+/* Tweet-List Styles */
+.tweet-list {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 1em 0;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  width: 10em;
+}
+
+.tweet-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tweet-list .tweet-list-item {
+  padding: 1em;
+  border-left: 3px solid transparent;
+  transition: border-left-color 0.5s;
+  user-select: none;
+}
+
+.tweet-list .tweet-list-item:hover {
+  cursor: pointer;
+  color: rgba(47, 128, 237, 1);
+}
+
+.tweet-list .tweet-list-item[selected] {
+  color: rgba(47, 128, 237, 1);
+  border-left: 3px solid rgba(47, 128, 237, 1);
+  border-radius: 2px;
+  transition-timing-function: ease;
+}
