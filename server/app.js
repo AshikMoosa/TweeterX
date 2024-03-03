@@ -18,6 +18,20 @@ let sessionOptions = session({
 app.use(sessionOptions);
 app.use(flash());
 
+// function which runs on every req
+app.use(function (req, res, next) {
+  // make current user id available on req object
+  if (req.session.user) {
+    req.visitorId = req.session.user._id;
+  } else {
+    req.visitorId = 0;
+  }
+
+  // make user session data available with view templates
+  res.locals.user = req.session.user;
+  next();
+});
+
 // Read 2 types of form data
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

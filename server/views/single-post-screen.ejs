@@ -209,6 +209,7 @@
       display: flex;
       flex-direction: row;
       column-gap: 1em;
+      justify-content: space-between;
     }
 
     .tweet-card .profile-info .profile-img {
@@ -219,7 +220,8 @@
 
     .tweet-card .profile-info .profile-details {
       display: flex;
-      flex-direction: column;
+      /* flex-direction: column; */
+      column-gap: 1em;
     }
 
     .tweet-card .profile-info .profile-details:hover {
@@ -505,15 +507,25 @@
 
           <div class="tweet-card">
             <div class="profile-info">
-              <img src="/avatar.svg" alt="profile-img" class="profile-img">
+
               <div class="profile-details">
-                <span class="name" style="text-transform: capitalize;">
-                  <%= post.author.username %>
-                </span>
-                <span class="time-stamp">
-                  <%= post.createdDate.toDateString() %>
-                </span>
+                <img src="/avatar.svg" alt="profile-img" class="profile-img">
+                <div class="profile-data" style="display: flex; flex-direction: column;">
+                  <span class="name" style="text-transform: capitalize;">
+                    <%= post.author.username %>
+                  </span>
+                  <span class="time-stamp">
+                    <%= post.createdDate.toDateString() %>
+                  </span>
+                </div>
               </div>
+              <% if(post.isVisitorOwner) { %>
+                <div class="modify-post">
+                  <a href="/post/<%= post._id %>/edit">
+                    <button class="edit">Edit</button>
+                  </a>
+                </div>
+                <% } %>
             </div>
 
 
