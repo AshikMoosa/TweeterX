@@ -20,6 +20,10 @@ app.use(flash());
 
 // function which runs on every req
 app.use(function (req, res, next) {
+  // make all error and success flash messages
+  res.locals.errors = req.flash("errors");
+  res.locals.success = req.flash("success");
+
   // make current user id available on req object
   if (req.session.user) {
     req.visitorId = req.session.user._id;

@@ -8,10 +8,23 @@
 </head>
 
 <body>
-  <textarea name="body" id="post-body" cols="30" rows="10">
+  <% errors.forEach(function(message) { %>
+    <div id="toast" class="error">
+      <%= message %>
+    </div>
+    <% }) %>
+
+      <% success.forEach(function(message) { %>
+        <div id="toast" class="success">
+          <%= message %>
+        </div>
+        <% }) %>
+          <form action="/post/<%= post._id %>/edit" method="post">
+            <textarea name="body" id="post-body" cols="30" rows="10">
     <%= post.body %>
   </textarea>
-  <button class="save">save</button>
+            <button class="save">save</button>
+          </form>
 </body>
 
 </html>
